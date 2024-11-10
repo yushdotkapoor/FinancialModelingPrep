@@ -28,30 +28,6 @@ public struct SymbolChangeInfo: Codable {
     public let newSymbol: String
 }
 
-public struct ExchangeSymbolInfo: Codable {
-    public let symbol: String
-    public let name: String?
-    public let price: Double?
-    public let changesPercentage: Double?
-    public let change: Double?
-    public let dayLow: Double?
-    public let dayHigh: Double?
-    public let yearLow: Double?
-    public let marketCap: Int64
-    public let priceAvg50: Double?
-    public let priceAvg200: Double?
-    public let exchange: String
-    public let volume: Int64
-    public let avgVolume: Int64?
-    public let open: Double?
-    public let previousClose: Double?
-    public let eps: Double?
-    public let pe: Double?
-    public let earningsAnnouncement: Date?
-    public let sharesOutstanding: Int64
-    public let timestamp: Date
-}
-
 extension FMPClient {
     
     public func stockList() async throws -> [SymbolInfo] {
@@ -86,7 +62,7 @@ extension FMPClient {
         return try await get("symbol_change", version: "v4")
     }
     
-    public func exchangeSymbols(for exchange: String) async throws -> [ExchangeSymbolInfo] {
+    public func exchangeSymbols(for exchange: String) async throws -> [FullQuote] {
         return try await get("symbol/\(exchange)")
     }
     
