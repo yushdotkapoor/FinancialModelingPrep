@@ -1,6 +1,6 @@
 # FinancialModelingPrep SDK for Swift
 
-The **FinancialModelingPrep SDK** for Swift provides a seamless way to access financial data from the [Financial Modeling Prep API](https://financialmodelingprep.com/), which offers comprehensive information on global companies, stock exchanges, currencies, and more. With this SDK, developers can easily retrieve real-time and historical data for financial analysis or integration into their own applications.
+The **FinancialModelingPrep** SDK for Swift provides a seamless way to access financial data from the [Financial Modeling Prep API](https://financialmodelingprep.com/), which offers comprehensive information on global companies, stock exchanges, currencies, and more. With this SDK, developers can easily retrieve real-time and historical data for financial analysis or integration into their own applications.
 
 ## Features
 
@@ -18,15 +18,7 @@ The **FinancialModelingPrep SDK** for Swift provides a seamless way to access fi
 
 ## Installation
 
-### Swift Package Manager
-
-To integrate FinancialModelingPrep SDK into your Swift project, use [Swift Package Manager (SPM)](https://swift.org/package-manager/):
-
-1. Go to your Xcode project settings.
-2. Select the **Swift Packages** tab.
-3. Click on the **+** button to add a new package.
-4. Enter the URL for this repository: `https://github.com/yushdotkapoor/FinancialModelingPrep`.
-5. Select the latest release and add the package to your project.
+There are currently no releases for this SDK because the project is not finished. You will have to download the repository and add it to your Xcode library.
 
 ## Getting Started
 
