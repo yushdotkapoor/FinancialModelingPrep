@@ -48,6 +48,10 @@ To use the Financial Modeling Prep API, sign up at [FinancialModelingPrep](https
    let client = FMPClient(apiKey: "YOUR_API_KEY")
    ```
 
+## Current State
+
+The current state of this library is in its early stages and is not complete. The Financial Modeling Prep API contains hundreds of endpoints and I am trying to add as many as I can. Feel free to add more if you see something missing!
+
 ## License
 
 This SDK is available under the MIT license. See the [LICENSE](./LICENSE) file for more details.
