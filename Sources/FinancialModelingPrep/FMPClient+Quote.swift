@@ -81,22 +81,45 @@ public struct StockPriceChange: Codable {
     }
 }
 
-public struct AftermarketTrade: Codable {
+public struct MarketTrade: Codable {
     public let symbol: String
     public let price: Double
     public let size: Double
     public let timestamp: Int64
 }
 
-public struct AftermarketQuote: Codable {
+public struct MarketQuote: Codable {
     public let symbol: String
     public let ask: Double
     public let bid: Double
-    public let asize: Double
-    public let bsize: Double
+    public let asize: Double?
+    public let bsize: Double?
     public let timestamp: Int64
 }
 
+public struct FullPrice: Codable {
+    public let bidSize: Double
+    public let askPrice: Double
+    public let volume: Double
+    public let askSize: Double
+    public let bidPrice: Double
+    public let lastSalePrice: Double
+    public let lastSaleSize: Double
+    public let fmpLast: Double
+    public let lastUpdated: Date
+    public let symbol: String
+}
+
+public struct ForexPrice: Codable {
+    public let ticker: String
+    public let bid: Double
+    public let ask: Double
+    public let open: Double
+    public let low: Double
+    public let high: Double
+    public let changes: Double
+    public let date: Date
+}
 
 extension FMPClient {
     
@@ -129,22 +152,45 @@ extension FMPClient {
         return priceChange[0]
     }
     
-    public func prePostMarketTrade(symbol: String) async throws -> AftermarketTrade {
+    public func aftermarketTrade(symbol: String) async throws -> MarketTrade {
         return try await get("pre-post-market-trade/\(symbol)", version: "v4")
     }
     
-    public func prePostMarket(symbol: String) async throws -> AftermarketQuote {
+    public func aftermarketQuote(symbol: String) async throws -> MarketQuote {
         return try await get("pre-post-market/\(symbol)", version: "v4")
     }
     
-    public func batchQuote(symbols: [String]) async throws -> [AftermarketQuote] {
+    public func batchQuote(symbols: [String]) async throws -> [MarketQuote] {
         return try await get("batch-pre-post-market/\(symbols.joined(separator: ",")))", version: "v4")
     }
     
-    public func batchQuote(symbol: [String]) async throws -> [AftermarketTrade] {
-        return try await get("batch-pre-post-market-trade/\(symbol.joined(separator: ","))", version: "v4")
+    public func batchTrade(symbols: [String]) async throws -> [MarketTrade] {
+        return try await get("batch-pre-post-market-trade/\(symbols.joined(separator: ","))", version: "v4")
     }
     
+    public func lastForexQuote(symbols: [String]) async throws -> [MarketQuote] {
+        return try await get("forex/last/\(symbols.joined(separator: ","))", version: "v4")
+    }
+    
+    public func lastCryptoTrade(symbols: [String]) async throws -> [MarketTrade] {
+        return try await get("crypto/last/\(symbols.joined(separator: ","))", version: "v4")
+    }
+    
+    public func realTimeFullPrice(symbols: [String]) async throws -> [FullPrice] {
+        return try await get("stock/full/real-time-price/\(symbols.joined(separator: ","))")
+    }
+    
+    public func realTimeFullPrice() async throws -> [FullPrice] {
+        return try await get("stock/full/real-time-price")
+    }
+    
+    public func forexPrice(symbols: [String]) async throws -> [ForexPrice] {
+        return try await get("fx/\(symbols.joined(separator: ","))")
+    }
+    
+    public func forexPrice() async throws -> [ForexPrice] {
+        return try await get("fx")
+    }
     
     
 }
