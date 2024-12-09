@@ -8,25 +8,15 @@
 
 import Foundation
 
-public struct DividendsCalendar: Codable {
-    public let date: Date
-    public let label: String
-    public let adjDividend: Double
-    public let symbol: String
-    public let dividend: Double
-    public let recordDate: Date
-    public let paymentDate: Date
-    public let declarationDate: Date
-}
 
 public struct DividendsHistorical: Codable {
     public let symbol: String
-    public let historical: [DividendsCalendar]
+    public let historical: [Dividend]
 }
 
 extension FMPClient {
     
-    public func dividendsCalendar(from: Date? = nil, to: Date? = nil) async throws -> [DividendsCalendar] {
+    public func dividendsCalendar(from: Date? = nil, to: Date? = nil) async throws -> [Dividend] {
         var searchParams: [String: String?] = [:]
         if let from {
             searchParams["from"] = Utils.iso8601DateOnlyFormatter.string(from: from)
@@ -38,7 +28,7 @@ extension FMPClient {
         return try await get("stock_dividend_calendar", searchParams: searchParams)
     }
     
-    public func historicalDividendsCalendar(symbol: String) async throws -> [UpgradeOrDowngrade] {
+    public func historicalDividendsCalendar(symbol: String) async throws -> DividendsHistorical {
         return try await get("historical-price-full/stock_dividend/\(symbol)")
     }
 }

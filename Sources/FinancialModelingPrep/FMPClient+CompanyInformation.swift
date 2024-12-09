@@ -231,6 +231,7 @@ public struct CompanyInsideTrade: Codable {
 public struct CompanySplit: Codable {
     public let date: Date
     public let label: String
+    public let symbol: String?
     public let numerator: Int
     public let denominator: Int
 }
@@ -239,6 +240,7 @@ public struct Dividend: Codable {
     public let date: Date
     public let label: String
     public let adjDividend: Double
+    public let symbol: String?
     public let dividend: Double
     public let recordDate: Date
     public let paymentDate: Date
